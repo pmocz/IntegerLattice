@@ -1,6 +1,6 @@
 # Integer Lattice
-## Philip Mocz (2016)
-## Harvard University
+Philip Mocz (2016)
+Harvard University
 
 # Libraries
 
@@ -11,6 +11,8 @@ You can install locally and add it to your path:
 export LD_LIBRARY_PATH=/home/pmocz/PoisFFT/lib/gcc:$LD_LIBRARY_PATH
 
 Needs hdf5, fftw3
+
+You will have to modify the Makefile to point to your library installations
 
 # How to run
 

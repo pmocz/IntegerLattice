@@ -1,0 +1,5 @@
+IntegerLattice
+build/
+output/
+scratch/
+analysis/*.pdf
