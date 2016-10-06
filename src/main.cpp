@@ -1,4 +1,5 @@
 #include <algorithm>
+#include <ctime>
 #include <iostream>
 #include <iterator>
 
@@ -53,35 +54,47 @@ col_iterator col_end(int col)   {  return col_iterator(&(lattice[0][col]) + NVX*
 col_iterator col_entry(int col, int row) {  return col_iterator(&(lattice[0][col]) + NVX*row); }
 
 
+/** set the initial condition */
+double get_init_f(double x, double vx) {
+  double f, sigma, A, k;
+  
+  sigma = 0.5 / sqrt(4.0*M_PI);
+  A = 0.01;
+  k = 2.0 * 2*M_PI / (2.0*L);
+  f = exp( -vx*vx/2.0/sigma/sigma );
+  f *= ( 1.0 + A*cos(k*x/(2.0*L)) );
+  f /= sqrt( 2.0*M_PI*sigma*sigma );
+  return f;
+}
+
+
+
 
 
 /** Main Function */
 int main() {
   int shift;
   double x_phys, vx_phys;
+  clock_t clock_begin, clock_end;
+  double elapsed_secs;
+  
 
   // Set the initial conditions
   for ( int x = 0; x < NX; x++ ) 
     for ( int vx = 0; vx < NVX; vx++ ) {
-      double f, sigma, A, k;
-      
-      sigma = 0.5 / sqrt(4.0*M_PI);
-      A = 0.01;
-      k = 2.0 * 2*M_PI / (2.0*L);
       
       x_phys  = -L + (1.0*x + 0.5) * DX;
       vx_phys = -V + (1.0*vx + 0.5) * DVX;
 
-      f = exp( -vx_phys*vx_phys/2.0/sigma/sigma );
-      f *= ( 1.0 + A*cos(k*x_phys/(2.0*L)) );
-      f /= sqrt( 2.0*M_PI*sigma*sigma );
-      lattice[x][vx] = f;
+      lattice[x][vx] = get_init_f(x_phys,vx_phys);
     }
   save(lattice, 0);
 
 
   // Main Loop
+  clock_begin = clock();
   for ( int t = 0; t < NT; t++ )  {
+    
     // get density
     for ( int x = 0; x < NX; x++ ) {
      rho[x] = 0.0;
@@ -108,6 +121,12 @@ int main() {
     // Save output as HDF5
     if(((t+1) % OUTPUTEVERY) == 0)
       save(lattice, t+1);
+      
   }
+  clock_end = clock();
+  
+  elapsed_secs = double(clock_end - clock_begin) / CLOCKS_PER_SEC;
+  
+  cout << "Simulation done! Took " << elapsed_secs << " seconds\n";
   
 }
