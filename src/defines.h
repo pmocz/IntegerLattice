@@ -1,3 +1,6 @@
+#ifndef DEFINES_H
+#define DEFINES_H
+
 /* Resolution */
 #define NX           1024
 #define NVX          1024
@@ -14,3 +17,4 @@
 
 #define DIM          1
 
+#endif

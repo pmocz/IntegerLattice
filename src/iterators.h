@@ -1,3 +1,6 @@
+#ifndef ITERATORS_H
+#define ITERATORS_H
+
 #include <algorithm>
 #include <iterator>
 
@@ -41,3 +44,5 @@ struct col_iterator : public iterator<forward_iterator_tag, double> {
 col_iterator col_begin(double (* lattice)[NVX], int col) {  return col_iterator(&(lattice[0][col]));          }
 col_iterator col_end(double (* lattice)[NVX], int col)   {  return col_iterator(&(lattice[0][col]) + NVX*NX); }
 col_iterator col_entry(double (* lattice)[NVX], int col, int row) {  return col_iterator(&(lattice[0][col]) + NVX*row); }
+
+#endif
