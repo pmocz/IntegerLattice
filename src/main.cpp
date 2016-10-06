@@ -1,7 +1,5 @@
-
 #include <ctime>
 #include <iostream>
-#include <math.h>
 
 #include "defines.h"
 #include "init_conditions.h"
