@@ -1,5 +1,4 @@
 #include <fftw3.h>
-#include <iostream>
 #include <math.h>
 
 #include "defines.h"
@@ -46,9 +45,6 @@ void poisson1D(const double (&rho)[NX], double (&acc)[NX]) {
   acc[NX-1] = -( 3.0*phi[NX-1] - 4.0*phi[NX-2] + phi[NX-3] ) / (2.0*DX);
   for(int x = 1; x < NX-1; x++)
     acc[x] = -( phi[x + 1] - phi[x - 1] ) / (2.0*DX);
-  
-  //debug
-  //std::cout << acc[500] << ' ' << phi[500] << ' ' << rho[500] << '\n';
   
   // free memory
   delete[] RHS;

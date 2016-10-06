@@ -106,7 +106,8 @@ int main() {
     }
     
     // Save output as HDF5
-    save(lattice, t+1);
+    if(((t+1) % OUTPUTEVERY) == 0)
+      save(lattice, t+1);
   }
   
 }

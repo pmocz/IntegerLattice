@@ -1,23 +1,31 @@
 # Integer Lattice
+
 Philip Mocz (2016)
+
 Harvard University
+
+(code in development)
+
 
 # Libraries
 
 Needs the PoisFFT package
+
 https://github.com/LadaF/PoisFFT
 
-You can install locally and add it to your path:
+You can install the library locally and add it to your path.
+E.g. Add the following to your .bashrc file:
+```
 export LD_LIBRARY_PATH=/home/pmocz/PoisFFT/lib/gcc:$LD_LIBRARY_PATH
+```
 
-Needs hdf5, fftw3
+Also needs hdf5, fftw3
 
 You will have to modify the Makefile to point to your library installations
 
 # How to run
 
 recompile and run:
-
 ```
 make clean; make; ./IntegerLattice 
 ```
