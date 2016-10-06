@@ -36,6 +36,8 @@ row_iterator row_end(int row)   {  return row_iterator(&(lattice[row][0]) + NVX)
 row_iterator row_entry(int row, int col) {  return row_iterator(&(lattice[row][0]) + col); }
 
 
+
+
 /** Column iterator*/
 struct col_iterator : public iterator<forward_iterator_tag, double> {
  private:
@@ -54,6 +56,8 @@ col_iterator col_end(int col)   {  return col_iterator(&(lattice[0][col]) + NVX*
 col_iterator col_entry(int col, int row) {  return col_iterator(&(lattice[0][col]) + NVX*row); }
 
 
+
+
 /** set the initial condition */
 double get_init_f(double x, double vx) {
   double f, sigma, A, k;
@@ -66,7 +70,6 @@ double get_init_f(double x, double vx) {
   f /= sqrt( 2.0*M_PI*sigma*sigma );
   return f;
 }
-
 
 
 
