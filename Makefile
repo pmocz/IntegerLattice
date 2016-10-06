@@ -22,7 +22,7 @@ POISFFT_LIB = -L/home/pmocz/PoisFFT/lib/gcc -lpoisfft -lm  -lfftw3 -lfftw3f -lff
 
 SUBDIRS = .
 OBJS = main.o save.o poisson1D.o
-INCL = save.h poisson1D.h
+INCL = save.h poisson1D.h defines.h iterators.h
 
 
 
