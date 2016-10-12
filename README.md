@@ -18,6 +18,13 @@ E.g. Add the following to your .bashrc file:
 ```
 export LD_LIBRARY_PATH=/home/pmocz/PoisFFT/lib/gcc:$LD_LIBRARY_PATH
 ```
+To install this library, you can do 
+```
+git clone https://github.com/LadaF/PoisFFT.git
+cd PoisFFT/
+cd src/
+scons
+```
 
 Also needs hdf5, fftw3
 
