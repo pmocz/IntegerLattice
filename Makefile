@@ -21,8 +21,8 @@ POISFFT_LIB = -L/home/pmocz/PoisFFT/lib/gcc -lpoisfft -lm  -lfftw3 -lfftw3f -lff
 # needed objects/headers
 
 SUBDIRS = .
-OBJS = main.o save.o poisson1D.o init_conditions.o
-INCL = save.h poisson1D.h defines.h iterators.h init_conditions.h
+OBJS = main.o save.o poisson1D.o init_conditions.o method_orig.o method_memsave.o
+INCL = save.h poisson1D.h defines.h iterators.h init_conditions.h method.h
 
 
 

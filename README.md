@@ -18,7 +18,7 @@ E.g. Add the following to your .bashrc file:
 ```
 export LD_LIBRARY_PATH=/home/pmocz/PoisFFT/lib/gcc:$LD_LIBRARY_PATH
 ```
-To install this library, you can do 
+To install this library, in your directory for libraries, you can do 
 ```
 git clone https://github.com/LadaF/PoisFFT.git
 cd PoisFFT/
