@@ -47,7 +47,9 @@ void save(double (&dset_data)[NX][NVX], int time) {
 
 
 
-/** Receover the lattice line-by-line and save it */
+
+
+/** Recover the lattice line-by-line and save it */
 void save_mem(int (&accDt)[NT][NX], int time, double dt) {
   int x_int, vx_int;
   double x_phys, vx_phys;
@@ -116,7 +118,7 @@ void save_mem(int (&accDt)[NT][NX], int time, double dt) {
     H5Sclose(dataspace_id);
   }
   
-  
+  /* Close buffer space */
   H5Sclose(mem_space);
   
   /* End access to the dataset and release resources used by it. */

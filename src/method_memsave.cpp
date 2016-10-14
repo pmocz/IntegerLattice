@@ -1,5 +1,4 @@
 #include <algorithm>  // round()
-#include <iostream>
 
 #include "defines.h"
 #include "init_conditions.h"

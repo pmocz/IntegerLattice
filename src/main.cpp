@@ -1,7 +1,6 @@
 #include <ctime>
 #include <iostream>
 
-#include "defines.h"
 #include "method.h"
 
 /** Main Function */
