@@ -1,10 +1,9 @@
-#include <algorithm>  // round()
 #include <stdio.h>
 #include <string>
 
-#include "hdf5.h"
 #include "defines.h"
-#include "init_conditions.h"
+#include "hdf5.h"
+#include "Lattice.hpp"
 
 double buffer[NVX]; // data buffer for memsave version of code
 
@@ -50,10 +49,8 @@ void save(double (&dset_data)[NX][NVX], int time) {
 
 
 /** Recover the lattice line-by-line and save it */
-void save_mem(int (&accDt)[NT][NX], int time, double dt) {
-  int x_int, vx_int;
-  double x_phys, vx_phys;
-  
+void save_mem(Lattice & lattice, int time) {
+ 
   std::string st = std::to_string(time);
   std::string str = "output/snap" + st + ".h5";
   const char * filename = str.c_str();
@@ -85,25 +82,10 @@ void save_mem(int (&accDt)[NT][NX], int time, double dt) {
   // Append row-by-row. (Recover f)
   for ( int x = 0; x < NX; x++ ) {
     // recover row of f to buffer
-    for ( int vx = 0; vx < NVX; vx++ ) {
-      // trace back to initial condition
-      x_int = x;
-      vx_int = vx;
-      for ( int tt = time - 1; tt > -1; tt-- ) {
-        // undo drift
-        vx_phys = -V + (1.0 * vx_int + 0.5) * DVX;
-         x_int += (NX - (int) round( dt * vx_phys / DX ));
-         x_int = x_int % NX;
-        // undo kick
-        vx_int -= accDt[tt][x_int];
-      }
-      x_phys  = -L + (1.0 * x_int + 0.5) * DX;
-      vx_phys = -V + (1.0 * vx_int + 0.5) * DVX;
-      
-      buffer[vx] = get_init_f(x_phys,vx_phys);  // XXX finish Lattice.hpp class and use that instead to avoid repeating code
-    }
+    for ( int vx = 0; vx < NVX; vx++ )
+      buffer[vx] = lattice.get_f(x, vx, time);
     
-    // append buffer to datafile
+    // append buffer to datafile:
     
     // Select hyperslab on file dataset
     dataspace_id = H5Dget_space(dataset_id);

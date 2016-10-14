@@ -2,7 +2,7 @@
 #define DEFINES_H
 
 /* Method -- choose whether to save memory */
-// #define METHOD_MEMSAVE
+#define METHOD_MEMSAVE
 
 
 /* Resolution */
