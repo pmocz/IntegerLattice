@@ -6,20 +6,21 @@
 
 
 /* Resolution */
-#define NX           1024
-#define NVX          1024
-#define NT           30
-#define TMAX         3.0
-#define OUTPUTEVERY  10
-
+const int NX              = 1024;
+const int NVX             = 1024;
+const int NT              = 30;
+const int OUTPUTEVERY     = 10;
+const double TMAX         = 3.0;
 
 /* Domain -L:L -V:V */
-#define L            0.5
-#define V            1.0
+const double L            = 0.5;
+const double V            = 1.0;
+  
                     
-#define DX           ((2.0*L)/NX)
-#define DVX          ((2.0*V)/NVX)
+const double DX           = ((2.0*L)/NX);
+const double DVX          = ((2.0*V)/NVX);
+const double DT           = TMAX / NT;
 
-#define DIM          1
+const int DIM             = 1;
 
 #endif

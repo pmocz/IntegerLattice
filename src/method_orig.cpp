@@ -14,7 +14,6 @@ using namespace std;
 double lattice[NX][NVX]; // lattice (distribution function f)
 double rho[NX];          // density
 double acc[NX];          // acceleration
-double dt = TMAX / NT;   // timestep
   
 
 /** Original Integer Lattice Algorithm
@@ -51,14 +50,14 @@ void run_simulation() {
     
     // kick
     for ( int x = 0; x < NX; x++ ) {
-      shift = ( NVX - (int) round( dt * acc[x] / DVX ) ) % NVX;
+      shift = ( NVX - (int) round( DT * acc[x] / DVX ) ) % NVX;
       rotate( row_begin(lattice,x), row_entry(lattice,x,shift), row_end(lattice,x) );
     }
     
     // drift
     for ( int vx = 0; vx < NVX; vx++ ) {
       vx_phys = -V + (1.0 * vx + 0.5) * DVX;
-      shift = ( NX - (int) round( dt * vx_phys / DX ) ) % NX;
+      shift = ( NX - (int) round( DT * vx_phys / DX ) ) % NX;
       rotate( col_begin(lattice,vx), col_entry(lattice,vx,shift), col_end(lattice,vx) );
     }
     

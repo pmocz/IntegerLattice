@@ -17,11 +17,12 @@ class Lattice {
  
  
   /** Constructor */
-  Lattice() : dt_( TMAX / NT), accDt_() {
+  Lattice() : accDt_() {
   }
   /** Default destructor */
   ~Lattice() = default;
   
+  /** get distrib. func. at coordinate (x,vx) */
   double get_f(int x, int vx, int t) {
     double x_phys, vx_phys;
     
@@ -29,7 +30,7 @@ class Lattice {
     for ( int tt = t - 1; tt > -1; tt-- ) {
       // undo drift
       vx_phys = -V + (1.0 * vx + 0.5) * DVX;
-      x += (NX - (int) round( dt_ * vx_phys / DX ));
+      x += (NX - (int) round( DT * vx_phys / DX ));
       x = x % NX;
       // undo kick
       vx -= accDt_[tt][x];
@@ -44,12 +45,11 @@ class Lattice {
   
   void store_accel(int t, double (&acc)[NX]) {
       for ( int x = 0; x < NX; x++ )
-        accDt_[t][x] = (int) round( dt_ * acc[x] / DVX );
+        accDt_[t][x] = (int) round( DT * acc[x] / DVX );
   }
   
  private:
   
-   double dt_;   // timestep
    int accDt_[NT][NX];  // acceleration integers
  
 };
