@@ -47,7 +47,10 @@ in the analysis/ folder, run the python script:
 ```
 python plot.py 0 10 20 30
 ```
-
+or, to plot the snapshots run in parallel mode (split files), run:
+```
+python plotParallel.py 0 10 20 30
+```
 
 
 

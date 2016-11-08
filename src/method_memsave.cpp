@@ -6,6 +6,7 @@
 #include "Lattice.hpp"
 #include "poisson1D.h"
 #include "save.h"
+#include "hdf5.h"
 
 using namespace std;
 
@@ -23,19 +24,15 @@ void run_simulation() {
 
   MPI_Init(NULL, NULL);
 
-  int mpi_rank;
+  int mpi_rank, mpi_size;
   MPI_Comm_rank(MPI_COMM_WORLD, &mpi_rank);
-  int mpi_size;
   MPI_Comm_size(MPI_COMM_WORLD, &mpi_size);
   
   int n_elem_per_proc = NX / mpi_size;
   
   double rho_buffer[n_elem_per_proc];
 
-
-  if (mpi_rank == 0)
-    save_mem(lattice, 0);
-
+  save_mem_parallel(lattice, 0, mpi_rank, n_elem_per_proc);
 
   // Main Loop
   for ( int t = 0; t < NT; t++ )  {
@@ -63,9 +60,8 @@ void run_simulation() {
     lattice.store_accel(t, acc);
     
     // Save output as HDF5
-    if (mpi_rank == 0)
-      if(((t+1) % OUTPUTEVERY) == 0)
-        save_mem(lattice, t+1);
+    if(((t+1) % OUTPUTEVERY) == 0)
+      save_mem_parallel(lattice, t+1, mpi_rank, n_elem_per_proc);
       
   }
   
