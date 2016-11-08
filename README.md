@@ -37,6 +37,11 @@ recompile and run:
 make clean; make; ./IntegerLattice 
 ```
 
+to run in parallel (METHOD_MEMSAVE only):
+```
+make clean; make; mpirun -n 4 ./IntegerLattice
+```
+
 to plot snapshots (e.g. snaps 0, 10, 20, 30), 
 in the analysis/ folder, run the python script:
 ```

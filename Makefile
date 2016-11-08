@@ -11,8 +11,8 @@ OPTIMIZE    = -g -std=c++11 -fopenmp -funroll-loops -O3 -W -Wall -Wextra -Wfatal
 LINKER      = mpicxx
 
 #FFTW_LIB = -lfftw3
-HDF5_INCL = -I/usr/include/hdf5/serial
-HDF5_LIB  = -L/usr/lib/x86_64-linux-gnu/hdf5/serial -lhdf5
+HDF5_INCL = -I/usr/include/hdf5/openmpi
+HDF5_LIB  = -L/usr/lib/x86_64-linux-gnu/hdf5/openmpi -lhdf5
 POISFFT_INCL = -I/home/pmocz/PoisFFT/src
 POISFFT_LIB = -L/home/pmocz/PoisFFT/lib/gcc -lpoisfft -lm  -lfftw3 -lfftw3f -lfftw3_omp
 
