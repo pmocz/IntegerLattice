@@ -1,6 +1,10 @@
 IntegerLattice
 build/
-output/
+output/*.h5
+output/ERROR.lsf
+output/OUTPUT.lsf
+output/OUTPUT.*
+output/timings.txt
 scratch/
 analysis/*.pdf
 PoisFFT/
