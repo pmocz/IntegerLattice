@@ -1,6 +1,6 @@
 #!/bin/sh
 #SBATCH -p hernquist
-#SBATCH -J dCTRef 
+#SBATCH -J IntLattice 
 #SBATCH -n 64
 #SBATCH --ntasks-per-node=64
 #SBATCH -o output/OUTPUT.lsf
