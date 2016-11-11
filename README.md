@@ -41,7 +41,12 @@ make clean; make; ./IntegerLattice
 
 to run in parallel (METHOD_MEMSAVE only):
 ```
-make clean; make; mpirun -n 4 ./IntegerLattice
+mpirun -n 4 ./IntegerLattice
+```
+
+to compile job on odyssey:
+```
+./makeOdyssey.sh 
 ```
 
 to submit job to a queue (e.g. odyssey cluster):

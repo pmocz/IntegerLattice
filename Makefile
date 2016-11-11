@@ -11,11 +11,17 @@ OPTIMIZE    = -g -std=c++11 -fopenmp -funroll-loops -O3 -W -Wall -Wextra -Wfatal
 LINKER      = mpicxx
 
 #FFTW_LIB = -lfftw3
-HDF5_INCL = -I/usr/include/hdf5/openmpi
-HDF5_LIB  = -L/usr/lib/x86_64-linux-gnu/hdf5/openmpi -lhdf5
-POISFFT_INCL = -I/home/pmocz/PoisFFT/src
-POISFFT_LIB = -L/home/pmocz/PoisFFT/lib/gcc -lpoisfft -lm  -lfftw3 -lfftw3f -lfftw3_omp
-
+ifeq ($(SYSTYPE),"odyssey-gcc")
+  HDF5_INCL = -I/usr/include/hdf5/openmpi
+  HDF5_LIB  = -L/usr/lib/x86_64-linux-gnu/hdf5/openmpi -lhdf5
+  POISFFT_INCL = -I/home/pmocz/PoisFFT/src
+  POISFFT_LIB = -L/home/pmocz/PoisFFT/lib/gcc -lpoisfft -lm  -lfftw3 -lfftw3f -lfftw3_omp
+else
+  HDF5_INCL = 
+  HDF5_LIB  = -lhdf5
+  POISFFT_INCL = -I/n/home02/pmocz/C/PoisFFT/src
+  POISFFT_LIB = -L/n/home02/pmocz/C/PoisFFT/lib/gcc -lpoisfft -lm  -lfftw3 -lfftw3f -lfftw3_omp
+endif
 
 ############################################
 # needed objects/headers
@@ -33,7 +39,7 @@ INCL = save.h poisson1D.h defines.h iterators.h init_conditions.h method.h
 CFLAGS = $(OPTIMIZE) $(HDF5_INCL) $(POISFFT_INCL)
 #$(GSL_INCL) $(FFTW_INCL) -I$(BUILD_DIR)
 
-LIBS = $(HDF5_LIB) $(FFTW_LIB) $(POISFFT_LIB)
+LIBS = $(HDF5_LIB) $(POISFFT_LIB)
 # $(GSL_LIBS)
 
 
