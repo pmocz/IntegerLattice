@@ -13,16 +13,13 @@
 #SBATCH --mem-per-cpu=2400
 #SBATCH -t 0-02:00           # Runtime in D-HH:MM
 
+source new-modules.sh
 module purge
-
-module load hpc/intel-ipp-7.1.0.079
-module load hpc/intel-mkl-11.0.0.079
-module load hpc/intel-mpi-4.1.0.024
-module load hpc/gmp-5.1.1
-module load hpc/hdf5-1.8.9_intel-13.0.079
-module load hpc/fftw-2.1.5_impi-4.1.0.024_intel-13.0.079
-module load centos6/hwloc-1.7.2 
-module load hpc/fftw-3.3.2_openmpi-1.6.2_intel-13.0.079
+module load gcc/4.8.2-fasrc01
+module load openmpi/1.10.1-fasrc01
+module load gcc/4.8.2-fasrc01 openmpi/1.10.1-fasrc01 fftw/3.3.4-fasrc06
+module load gsl/2.1-fasrc01
+module load hdf5/1.8.16-fasrc01
 
 mpirun -np $SLURM_NTASKS ./IntegerLattice > output/OUTPUT.$SLURM_JOB_ID
 
